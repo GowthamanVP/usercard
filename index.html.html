@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Own JSON Data</title>
+  <style>
+    .card {
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>User Cards</h2>
+<div id="userCards"></div>
+
+<script>
+  async function getUsers() {
+    let response = await fetch('users.json'); // our own file
+    let data = await response.json();
+
+    let container = document.getElementById('userCards');
+
+    for (let user of data) {
+      let card = document.createElement('div');
+      card.className = 'card';
+
+      card.innerHTML = `
+        <h3>${user.name}</h3>
+        <p>Email: ${user.email}</p>
+        <p>Phone: ${user.phone}</p>
+      `;
+
+      container.appendChild(card);
+    }
+  }
+
+  getUsers();
+</script>
+
+</body>
+</html>
